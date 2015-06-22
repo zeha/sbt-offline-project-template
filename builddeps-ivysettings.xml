@@ -1,0 +1,20 @@
+<ivysettings>
+  <settings defaultResolver="maven" defaultConflictManager="all" />
+  <resolvers>
+    <chain name="sources">
+      <ibiblio name="maven" m2compatible="true" />
+      <url name="typesafe-ivy-releases">
+        <ivy pattern="https://repo.typesafe.com/typesafe/ivy-releases/[organisation]/[module]/[revision]/ivys/ivy.xml"/>
+        <artifact pattern="https://repo.typesafe.com/typesafe/ivy-releases/[organisation]/[module]/[revision]/[type]s/[artifact](-[classifier]).[ext]"/>
+      </url>
+      <url name="sbt-plugin-releases">
+        <ivy pattern="https://dl.bintray.com/sbt/sbt-plugin-releases/[organisation]/[module]/scala_2.10/sbt_0.13/[revision]/ivys/ivy.xml"/>
+        <artifact pattern="https://dl.bintray.com/sbt/sbt-plugin-releases/[organisation]/[module]/scala_2.10/sbt_0.13/[revision]/[type]s/[artifact](-[classifier]).[ext]"/>
+      </url>
+    </chain>
+    <filesystem name="builddeps">
+      <ivy pattern="${builddeps.dir}/[organisation]/[module]/[revision]/ivys/ivy.xml"/>
+      <artifact pattern="${builddeps.dir}/[organisation]/[module]/[revision]/[type]s/[artifact](-[classifier]).[ext]"/>
+    </filesystem>
+  </resolvers>
+</ivysettings>

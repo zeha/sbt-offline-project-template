@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<project name="ivy-repository" default="deps" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property file="project/build.properties" />
+	<property name="to.resolver" value="builddeps"/>
+    <property name="ivy.cache.dir" value="${user.home}/.ivy2/cache" />
+	<property name="ivy.jar.dir" value="${user.home}/.ivy2/jars" />
+	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+    <target name="load-ivy">
+    	<path id="ivy.lib.path">
+    		<pathelement location="${ivy.jar.file}"/>
+    	</path>
+    	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+    </target>
+
+    <target name="init-ivy" depends="load-ivy">
+      <ivy:settings id="settings" file="builddeps-ivysettings.xml"/>
+    </target>
+
+    <target name="deps" depends="init-ivy">
+      <ivy:install settingsRef="settings" organisation="org.scala-lang" module="scala-compiler" revision="2.10.4" from="sources" to="${to.resolver}" overwrite="true" transitive="true" />
+      <ivy:install settingsRef="settings" organisation="org.scala-sbt" module="sbt-launch" revision="${sbt.version}" from="sources" to="${to.resolver}" overwrite="true" transitive="true" />
+      <ivy:install settingsRef="settings" organisation="org.scala-sbt" module="sbt" revision="${sbt.version}" from="sources" to="${to.resolver}" overwrite="true" transitive="true" />
+      <ivy:install settingsRef="settings" organisation="com.hanhuy.sbt" module="android-sdk-plugin" revision="1.4.1" from="sources" to="${to.resolver}" overwrite="true" transitive="true" />
+    </target>
+</project>
